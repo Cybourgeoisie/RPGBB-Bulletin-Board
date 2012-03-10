@@ -1,0 +1,12 @@
+<?php
+$db = array(
+	'type' => '',
+	'host' => '',
+	'name' => '',
+	'user' => '',
+	'pass' => '',
+	'prefix' => 'scrollio'
+);
+
+define(DB_PREFIX, $db[prefix]);
+?>

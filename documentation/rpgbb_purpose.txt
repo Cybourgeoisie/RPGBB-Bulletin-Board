@@ -1,0 +1,14 @@
+/*	rpgBB Explanation and Purpose	*/
+by Richard Benjamin Heidorn
+
+How secure is rpgBB?
+
+	RpgBB has several layers of security. 
+	- Only template pages can be visited through the browser. A template page is any page which defines the 'SCROLLIO' variable as TRUE (and supposedly holds HTML information).
+	- Before each page is rendered, the rpgBB permissions of the end user are determined. This tells rpgBB what each the end user is able to do and what is forbidden to the end user.
+	- For each logged-in user, session variables are stored with information of the logged-in user's username, IP address, and unique session ID. The session ID and username is matched with the session ID and username information stored in an end-user's cookie, and the first three octets of the end-user's IP address are matched with those of the current session cookie. All discrepancies are logged. 
+
+What is rpgBB?
+
+	RpgBB is a bulletin board software based on phpBB and other famous forum software currently in use. The rpgBB will differ from other bulletin boards in that its primary function is to serve as a forum software for role playing games. It should simplify the process of creating and managing a forum text-based role play with numerous features. RpgBB should also be extremely cleanly written and easily extensible.
+

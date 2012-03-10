@@ -1,0 +1,4 @@
+# Use PHP5CGI as default
+#AddHandler fcgid-script .php
+
+#ErrorDocument 404 /notfound.html

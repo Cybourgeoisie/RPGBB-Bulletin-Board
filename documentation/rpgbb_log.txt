@@ -1,0 +1,42 @@
+/*	rpgBB Log	*/
+by Richard Benjamin Heidorn
+
+8.13.08
+
+Weirdest bug ever. JQuery won't expand or contract the forum_block accurately if the forum_description isn't wide enough to hit the floating elements to the right (the thread posts, etc).
+
+7.16.08
+
+Came up with the current page header:
+/******************************************
+Scrollio V.a.c.0.9
+*******************************************
+Copyright 2008, Richard Benjamin Heidorn
+e-mail: rbenh@washington.edu
+website: http://www.scrollio.com
+/******************************************
+Scrollio is free software. It can be modified and redistributed 
+under the terms of the GNU General Public License. Under no
+conditions can Scrollio, or any modification of it, be sold or
+used proprietarily or for commercial benefit. You should have 
+received a copy of the GNU General Public License along with 
+Scrollio, /license.txt. If not, see http://www.gnu.org/licenses/
+/******************************************
+JQuery is also dually released under the GNU GPL and MIT licenses. 
+Scrollio respects all copyrights and properties of jQuery.
+JQuery license (http://dev.jquery.com/browser/trunk/jquery/GPL-LICENSE.txt)
+******************************************/
+All throughout development, I will keep in mind the jQuery and language elements.
+
+Thought about it, going to make a new framework. Starting with security overlay.
+
+7.13.08
+
+Thinking about rewriting a lot of TRH to suit the forum module
+
+Cleaning up TRH web application framework for rpgBB, will replace plain JavaScript with jQuery
+
+Started the project, laid out the ideal technology for rpgBB: 
+	- php 5.0, mysql 4.1/5.0, jQuery 1.2.6 (Javascript framework), strict XHTML, clean CSS 3.0
+	- likely use of AJAX
+	- based on most recent version of The Rabbit Hole web application framework that I designed

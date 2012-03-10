@@ -1,0 +1,331 @@
+-- phpMyAdmin SQL Dump
+-- version 2.11.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Sep 23, 2008 at 11:57 PM. I know, late.
+-- Server version: 5.0.45
+-- PHP Version: 5.2.4
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: `DBNAME`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `DBPREFIX_categories`
+--
+
+CREATE TABLE IF NOT EXISTS `DBPREFIX_categories` (
+  `cat_id` smallint(5) unsigned NOT NULL auto_increment,
+  `cat_name` text,
+  `cat_desc` text,
+  `cat_order` smallint(5) unsigned NOT NULL,
+  `cat_status` tinyint(4) NOT NULL default '1',
+  `cat_type` varchar(5) NOT NULL,
+  PRIMARY KEY  (`cat_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `DBPREFIX_forums`
+--
+
+CREATE TABLE IF NOT EXISTS `DBPREFIX_forums` (
+  `cat_id` smallint(5) unsigned NOT NULL default '1',
+  `parent_id` smallint(5) unsigned NOT NULL default '0',
+  `forum_id` smallint(5) unsigned NOT NULL auto_increment,
+  `forum_name` varchar(70) default NULL,
+  `forum_desc` varchar(125) NOT NULL default 'Ê',
+  `forum_order` smallint(5) unsigned NOT NULL,
+  `forum_status` tinyint(1) unsigned NOT NULL default '0',
+  `forum_type` tinytext NOT NULL,
+  `forum_threads` mediumint(8) unsigned NOT NULL default '0',
+  `forum_posts` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`forum_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `DBPREFIX_forum_settings`
+--
+
+CREATE TABLE IF NOT EXISTS `DBPREFIX_forum_settings` (
+  `setting_name` varchar(35) NOT NULL,
+  `setting` text NOT NULL,
+  `setting_status` tinyint(4) NOT NULL default '1',
+  PRIMARY KEY  (`setting_name`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `DBPREFIX_groups`
+--
+
+CREATE TABLE IF NOT EXISTS `DBPREFIX_groups` (
+  `group_id` smallint(5) unsigned NOT NULL auto_increment,
+  `group_name` tinytext,
+  `group_desc` text,
+  PRIMARY KEY  (`group_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `DBPREFIX_group_members`
+--
+
+CREATE TABLE IF NOT EXISTS `DBPREFIX_group_members` (
+  `group_id` smallint(5) unsigned NOT NULL default '0',
+  `member_id` mediumint(8) unsigned default NULL,
+  `member_is_mod` tinyint(1) NOT NULL default '0'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `DBPREFIX_group_permissions`
+--
+
+CREATE TABLE IF NOT EXISTS `DBPREFIX_group_permissions` (
+  `group_id` smallint(5) unsigned NOT NULL default '0',
+  `cat_id` smallint(5) unsigned default NULL,
+  `forum_id` smallint(5) unsigned default NULL,
+  `thread_id` mediumint(8) unsigned default NULL,
+  `post_id` int(10) unsigned default NULL,
+  `can_view` tinyint(1) NOT NULL default '1',
+  `can_read` tinyint(1) NOT NULL default '1',
+  `can_post` tinyint(1) NOT NULL default '1',
+  `can_edit` tinyint(1) NOT NULL default '0',
+  `can_delete` tinyint(1) NOT NULL default '0',
+  `can_lock` tinyint(1) NOT NULL default '0'
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `DBPREFIX_members`
+--
+
+CREATE TABLE IF NOT EXISTS `DBPREFIX_members` (
+  `member_id` mediumint(8) unsigned NOT NULL auto_increment,
+  `member_name` varchar(24) NOT NULL,
+  `member_password` varchar(40) NOT NULL,
+  `member_email` varchar(320) NOT NULL,
+  `member_register_date` datetime NOT NULL,
+  `member_posts` int(10) unsigned NOT NULL default '0',
+  `member_status` tinyint(3) NOT NULL default '0',
+  `member_is_admin` tinyint(1) NOT NULL default '0',
+  `member_rank` smallint(5) unsigned NOT NULL default '0',
+  `member_avatar` varchar(200) default NULL,
+  `member_signature` varchar(500) default NULL,
+  `member_timezone` tinyint(4) NOT NULL default '0',
+  PRIMARY KEY  (`member_id`),
+  FULLTEXT KEY `member_name` (`member_name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `DBPREFIX_members_information`
+--
+
+CREATE TABLE IF NOT EXISTS `DBPREFIX_members_information` (
+  `info_id` smallint(5) unsigned NOT NULL auto_increment,
+  `info_title` varchar(250) default NULL,
+  `info_img` tinytext,
+  `info_type` tinyint(1) NOT NULL default '0',
+  `info_status` tinyint(1) NOT NULL default '1',
+  PRIMARY KEY  (`info_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `DBPREFIX_members_to_info`
+--
+
+CREATE TABLE IF NOT EXISTS `DBPREFIX_members_to_info` (
+  `info_id` tinyint(3) unsigned NOT NULL default '0',
+  `member_id` mediumint(8) unsigned default NULL,
+  `info_response` varchar(500) default NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `DBPREFIX_pages`
+--
+
+CREATE TABLE IF NOT EXISTS `DBPREFIX_pages` (
+  `page_id` tinyint(3) unsigned zerofill NOT NULL auto_increment,
+  `page_name` tinytext,
+  `page_content` mediumtext,
+  `page_status` tinyint(1) NOT NULL default '1',
+  `page_type` tinytext,
+  `page_groups` tinytext,
+  PRIMARY KEY  (`page_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `DBPREFIX_posts`
+--
+
+CREATE TABLE IF NOT EXISTS `DBPREFIX_posts` (
+  `post_id` int(10) unsigned NOT NULL auto_increment,
+  `thread_id` mediumint(8) unsigned NOT NULL,
+  `forum_id` smallint(5) unsigned NOT NULL,
+  `post_title` varchar(150) NOT NULL,
+  `post_body` mediumtext NOT NULL,
+  `post_author` mediumint(8) unsigned NOT NULL,
+  `post_time` datetime NOT NULL,
+  PRIMARY KEY  (`post_id`),
+  FULLTEXT KEY `post_title` (`post_title`,`post_body`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=93 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `DBPREFIX_private_messages`
+--
+
+CREATE TABLE IF NOT EXISTS `DBPREFIX_private_messages` (
+  `pm_id` mediumint(8) unsigned NOT NULL auto_increment,
+  `pm_re` mediumint(8) unsigned NOT NULL default '0',
+  `pm_from` mediumint(8) unsigned NOT NULL default '0',
+  `pm_to` mediumint(8) unsigned NOT NULL default '0',
+  `pm_received` tinyint(1) NOT NULL default '0',
+  `pm_time` datetime default NULL,
+  `pm_title` varchar(150) default NULL,
+  `pm_body` mediumtext,
+  PRIMARY KEY  (`pm_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=32 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `DBPREFIX_sessions`
+--
+
+CREATE TABLE IF NOT EXISTS `DBPREFIX_sessions` (
+  `session_id` char(32) NOT NULL default '',
+  `session_data` text NOT NULL,
+  `session_first_accessed` datetime NOT NULL,
+  `session_ip_first_accessed` varchar(64) NOT NULL default '0.0.0.0',
+  `session_last_accessed` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  `session_ip_last_accessed` varchar(64) NOT NULL default '0.0.0.0',
+  PRIMARY KEY  (`session_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `DBPREFIX_threads`
+--
+
+CREATE TABLE IF NOT EXISTS `DBPREFIX_threads` (
+  `thread_id` mediumint(8) unsigned NOT NULL auto_increment,
+  `forum_id` smallint(5) unsigned NOT NULL,
+  `thread_title` varchar(150) NOT NULL,
+  `thread_time` datetime NOT NULL,
+  `thread_author` mediumint(8) unsigned NOT NULL,
+  `thread_views` int(10) unsigned NOT NULL default '0',
+  `thread_replies` mediumint(8) unsigned NOT NULL default '0',
+  `thread_status` tinyint(4) NOT NULL default '1',
+  `thread_last_updated` datetime NOT NULL,
+  PRIMARY KEY  (`thread_id`),
+  FULLTEXT KEY `thread_title` (`thread_title`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+
+
+--
+-- Dumping data for table `DBPREFIX_categories`
+--
+
+INSERT INTO `DBPREFIX_categories` (`cat_id`, `cat_name`, `cat_desc`, `cat_order`, `cat_status`, `cat_type`) VALUES
+(1, 'Main Category', 'This is the main category of your forum', 1, 1, 'ooc');
+
+
+--
+-- Dumping data for table `DBPREFIX_forums`
+--
+
+INSERT INTO `DBPREFIX_forums` (`cat_id`, `parent_id`, `forum_id`, `forum_name`, `forum_desc`, `forum_order`, `forum_status`, `forum_type`, `forum_threads`, `forum_posts`) VALUES
+(1, 0, 1, 'Welcome to Scrollio!', 'Welcome to Scrollio forums.', 1, 1, 'ooc', 0, 0);
+
+
+--
+-- Dumping data for table `DBPREFIX_forum_settings`
+--
+
+INSERT INTO `DBPREFIX_forum_settings` (`setting_name`, `setting`, `setting_status`) VALUES
+('FORUM_NAME', 'Scrollio Forum', 1),
+('TITLE_SEPARATOR', '>', 1),
+('BREADCRUMBS', ':', 1),
+('FORUM_LOGO_URL', '', 1),
+('FORUM_BANNER_URL', '', 1),
+('FORUM_GREETING', 'Welcome!', 1),
+('PATH_TO_TEMPLATE', './layouts/templates/original', 1),
+('SELECTED_LANGUAGE_PACK', 'english', 1),
+('FORUM_DESC', 'This forum is powered by Scrollio Forum', 1),
+('POST_DISPLAY_NUM', '25', 1),
+('THREAD_DISPLAY_NUM', '15', 1);
+
+
+--
+-- Dumping data for table `DBPREFIX_groups`
+--
+
+INSERT INTO `DBPREFIX_groups` (`group_id`, `group_name`, `group_desc`) VALUES
+(0, 'Guests', NULL),
+(1, 'Members', NULL),
+(2, 'Awaiting Activation', NULL),
+(3, 'Banned', NULL);
+
+
+--
+-- Dumping data for table `DBPREFIX_group_permissions`
+--
+
+INSERT INTO `DBPREFIX_group_permissions` (`group_id`, `cat_id`, `forum_id`, `thread_id`, `post_id`, `can_view`, `can_read`, `can_post`, `can_edit`, `can_delete`, `can_lock`) VALUES
+(0, 1, NULL, NULL, NULL, 1, 1, 0, 0, 0, 0),
+(1, 1, NULL, NULL, NULL, 1, 1, 1, 0, 0, 0),
+(2, 1, NULL, NULL, NULL, 1, 1, 0, 0, 0, 0),
+(3, 1, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0);
+
+
+--
+-- Dumping data for table `DBPREFIX_members`
+--
+
+INSERT INTO `DBPREFIX_members` (`member_id`, `member_name`, `member_password`, `member_email`, `member_register_date`, `member_status`, `member_is_admin`) VALUES
+(0, 'Guest', 'guest', 'guest', UTC_TIMESTAMP(), 0, 0),
+(1, 'USERNAMEHERE', 'PASSWORDHERE', 'EMAILHERE', UTC_TIMESTAMP(), 1, 1);
+
+
+--
+-- Dumping data for table `DBPREFIX_members_information`
+--
+
+INSERT INTO `DBPREFIX_members_information` (`info_id`, `info_title`, `info_img`, `info_type`, `info_status`) VALUES
+(1, 'Website', '', 0, 1),
+(2, 'Occupation', '', 0, 1),
+(3, 'Interests', '', 0, 1),
+(4, 'AIM Address', '', 0, 1),
+(5, 'MSN Messenger', '', 0, 1);
+
+
+--
+-- Dumping data for table `DBPREFIX_private_messages`
+--
+
+INSERT INTO `DBPREFIX_private_messages` (`pm_id`, `pm_re`, `pm_from`, `pm_to`, `pm_received`, `pm_time`, `pm_title`, `pm_body`) VALUES
+(1, 0, 1, 1, 0, UTC_TIMESTAMP, 'Welcome to Scrollio', 'Welcome to Scrollio Forums.\n\nCheck the Scrollio website consistently for updates to this alpha candidate at Scrollio.com.');
