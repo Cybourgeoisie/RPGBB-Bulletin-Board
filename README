@@ -1,0 +1,5 @@
+Scrollio Bulletin Board
+
+This program is a PHP bulletin board software similar to phpBB. It was my first substantial excursion into progamming in 2008 and a bit of 2009. Originally, the program was intended to be the foundation for forum software that would include many additional features for text-based community role playing games. While working on this project, I landed a programming job and started school full-time, which relegated this project to the back closet.
+
+It somehow still runs, and it works with PHP5 and MySQL 5.
